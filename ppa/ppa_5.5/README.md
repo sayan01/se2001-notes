@@ -1,16 +1,12 @@
-# Programming Practice Assignment - Week 5 - Question 6
+# Programming Practice Assignment - Week 5 - Question 5
 
 ## Problem Statement
 
-Write a script to print the users(one on each line) who are logged in successfully.
-Extract the information from the file named `myauth.log` located in the current working directory.
-The output should contain usernames only and should be unique.
+Write a Bash command to print the number of failed login attempts which are recorded in the file myauth.log located in the current working directory.
 
-Hint: Use uniq command to get all distinct lines of the output.
+Contents of myauth.log is given below.
 
-Contents of myauth.log is given below
-
-```
+```bash
 Jan 20 20:11:34 IITMBSC systemd-logind[897]: Session 27 logged out. Waiting for processes to exit.
 Jan 20 20:11:34 IITMBSC systemd-logind[897]: Removed session 27.
 Jan 20 20:17:01 IITMBSC CRON[70999]: pam_unix(cron:session): session opened for user root by (uid=0)
@@ -74,15 +70,12 @@ Jan 20 20:24:51 IITMBSC login[72242]: FAILED LOGIN (2) on '/dev/tty4' FOR 'UNKNO
 
 ## Instructions
 
-Write your command in the file `login.sh`.
+Write your command in the `fail.sh` file.
 Your script will not receive any input from the standard input or command line arguments.
 Your script should output to the standard output.
 
 ## Sample Output
 
 ```bash
-gdm
-guest
-guest2
-student
+7
 ```

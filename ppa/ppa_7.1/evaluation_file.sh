@@ -6,7 +6,7 @@ err(){
 }
 
 req=( "mktemp" "diff" "basename" "col" "find" )
-executable="oddargs.sh"
+executable="evenodd.awk"
 for i in "${req[@]}"; do
   command -v "$i" > /dev/null 2>&1 || err "$i is not installed"
 done
@@ -23,8 +23,11 @@ test_type=${test_type%/}
 cat >script.sh <<EOF
 #!/bin/bash
 
-readarray -t args
-bash "\$(dirname "\${BASH_SOURCE[0]}")/$executable" "\${args[@]}" 2>&1 < /dev/null
+exec="./\$(dirname "\${BASH_SOURCE[0]}")/$executable"
+
+[[ -r "\$exec" ]] || exit 1
+
+awk -f "\$exec" 2>&1
 
 EOF
 chmod u+x script.sh

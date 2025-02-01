@@ -9,9 +9,16 @@ if [[ ! -x ../script.sh ]]; then
   exit 1
 fi
 
-echo > x00.in
-echo fhed46 > x01.in
-echo 46gfdh > x02.in
+months=(jan feb mar apr may jun jul aug sep oct nov dec)
+(
+for _ in {1..6}; do
+  tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 10
+  echo
+done
+for _ in {1..4}; do
+  echo "${months[$((RANDOM % 12))]}"
+done
+)| shuf | split -l 1 --additional-suffix=.in -d
 
 rm test_case_* -rf
 

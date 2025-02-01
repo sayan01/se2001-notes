@@ -9,15 +9,16 @@ if [[ ! -x ../script.sh ]]; then
   exit 1
 fi
 
-grep -xE '[a-z]{5}' /usr/share/dict/words > corpus
+i=0
+for _ in {1..10}; do
+  while [ -z "$num" ] || grep -Fx "$num" x*.in &>/dev/null; do
+    num=$((RANDOM%80+20))
+  done
+  echo "$num" > "x0$i.in"
+  ((i++))
+done
 
-for _ in {1..100}; do
-  words=$((RANDOM % 5 + 1))
-  shuf corpus | head -n "$words" | paste -s -d ' '
-done | split -n l/10 --additional-suffix=.in -d
-
-rm corpus -f
-rm ./test_case_* -rf
+rm test_case_* -rf
 
 for input in *.in; do
   number=${input%.in}
